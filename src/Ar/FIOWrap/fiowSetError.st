@@ -1,11 +1,11 @@
-(********************************************************************
- * COPYRIGHT -- Automation Resources Group
- ********************************************************************
- * Library: FIOWrap
+(*
  * File: fiowSetError.st
- * Author: David Blackburn
- * Created: December 22, 2011
- ********************************************************************
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of FIOWrap, licensed under the MIT License.
+ * 
+  ********************************************************************
  * Implementation of library FIOWrap
  ********************************************************************) 
 

@@ -1,4 +1,11 @@
-
+(*
+ * File: fioOpenFile_Init.st
+ * Copyright (c) 2023 Loupe
+ * https://loupe.team
+ * 
+ * This file is part of FIOWrap, licensed under the MIT License.
+ * 
+  *******************************************************************)
 //-------------------------------------------------------------------
 // Open a file in the init subroutine
 //-------------------------------------------------------------------
