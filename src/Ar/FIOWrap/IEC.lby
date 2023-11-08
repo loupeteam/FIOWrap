@@ -4,7 +4,6 @@
   <Files>
     <File>FIOWrap.html</File>
     <File>FIOWrap.md</File>
-    <File>VersionHistory.txt</File>
     <File Description="Exported data types">FIOWrap.typ</File>
     <File Description="Exported constants">FIOWrap.var</File>
     <File Description="Exported functions and function blocks">FIOWrap.fun</File>
