@@ -1,0 +1,6 @@
+VAR
+	Recipe : Recipe_typ;
+	FIOWrapper : FIOWrap_typ;
+	SaveRecipeFile : BOOL;
+	OpenRecipeFile : BOOL;
+END_VAR
