@@ -34,6 +34,7 @@ TYPE
 		FIOWRAP_ST_WAIT := 0, (*0*)
 		FIOWRAP_ST_OPEN, (*1*)
 		FIOWRAP_ST_CREATE, (*2*)
+		FIOWRAP_ST_WRITE_HEADER,
 		FIOWRAP_ST_READ, (*3*)
 		FIOWRAP_ST_WRITE, (*4*)
 		FIOWRAP_ST_CLOSE, (*5*)
@@ -93,6 +94,8 @@ TYPE
 		offset : UDINT; (*Offset within the file to read/write from/to.*)
 		MaxFileSize : UDINT; (*Maximum file size (only evaluated when appending to a file)*)
 		MultiFile : BOOL;
+		pHeader : UDINT;
+		headerLen : UDINT;
 	END_STRUCT;
 	FIOWrap_IN_CMD_typ : 	STRUCT 
 		Open : BOOL; (*Open a file and read its contents*)

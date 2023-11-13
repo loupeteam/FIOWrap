@@ -1,6 +1,5 @@
 VAR
-	Recipe : Recipe_typ;
+	header : STRING[255];
+	exampleLog : STRING[3000];
 	FIOWrapper : FIOWrap_typ;
-	SaveRecipeFile : BOOL;
-	OpenRecipeFile : BOOL;
 END_VAR

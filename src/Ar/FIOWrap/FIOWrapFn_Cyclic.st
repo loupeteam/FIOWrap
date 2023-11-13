@@ -348,7 +348,7 @@ FUNCTION FIOWrapFn_Cyclic
 						OR	(t.Internal.CurrOperation = FIOWRAP_OP_APPEND)
 						)THEN
 	
-						t.Internal.State:=	FIOWRAP_ST_WRITE;
+						t.Internal.State:=	FIOWRAP_ST_WRITE_HEADER;
 					
 					ELSE
 					
@@ -369,7 +369,54 @@ FUNCTION FIOWrapFn_Cyclic
 			
 			END_IF (* If done *)
 	
-	
+		FIOWRAP_ST_WRITE_HEADER:
+			
+			// skip this if no header
+			IF t.IN.PAR.pHeader = 0 OR t.IN.PAR.headerLen = 0 THEN
+				t.Internal.State:=	FIOWRAP_ST_WRITE;
+				RETURN;
+			END_IF
+			
+			t.Internal.FUB.Write.enable:=	1;
+			t.Internal.FUB.Write.ident:=	t.Internal.FileID;
+			
+			t.Internal.FUB.Write.pSrc:=		t.IN.PAR.pHeader;
+			t.Internal.FUB.Write.len:=		t.IN.PAR.headerLen;
+			
+			(* Check status *)
+		
+			IF( t.Internal.FUB.Write.status < FIOWRAP_STAT_DISABLED ) THEN
+  			
+			
+				(* Turn off FUB *)
+			
+				t.Internal.FUB.Write.enable:=	0;
+  
+
+				IF( t.Internal.FUB.Write.status = FIOWRAP_STAT_OK ) THEN
+   				
+			
+					(* All good, go to close state *)
+					t.Internal.State:=	FIOWRAP_ST_WRITE;
+				
+				
+				ELSE
+
+				
+					(* Error *)
+					(* Since already opened file, need to close file before going to error state *)
+				
+					t.Internal.ErrorClose:=	1;
+				
+					fiowSetError( t.Internal.FUB.Write.status, t );
+				
+					t.Internal.State:=		FIOWRAP_ST_CLOSE;
+			
+				
+				END_IF (* If error *)
+				
+			END_IF (* If done *)
+				
 		FIOWRAP_ST_READ:
 	
 		
@@ -428,7 +475,7 @@ FUNCTION FIOWrapFn_Cyclic
 		
 			IF( t.Internal.CurrOperation = FIOWRAP_OP_SAVEAS )THEN
 		
-				t.Internal.FUB.Write.offset:=	t.IN.PAR.offset;
+				t.Internal.FUB.Write.offset:=	t.IN.PAR.offset + t.IN.PAR.headerLen;
 		
 			ELSIF( 		(t.Internal.CurrOperation = FIOWRAP_OP_APPEND)
 				AND	(t.Internal.FileLen + t.IN.PAR.len <= t.IN.PAR.MaxFileSize)

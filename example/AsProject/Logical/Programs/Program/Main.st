@@ -1,48 +1,48 @@
 
 PROGRAM _INIT
-	(* Insert code here *)
-	 
+	
+	FIOWrapper.IN.PAR.FileDevice := 'USER';
+	FIOWrapper.IN.PAR.FileName := 'exampleLog.txt';
+	
+	exampleLog := '11/13/2023 3:16PM, a thing happened
+11/13/2023 3:16PM, a thing happened
+11/13/2023 3:16PM, a thing happened
+11/13/2023 3:16PM, a thing happened
+11/13/2023 3:16PM, a thing happened
+11/13/2023 3:16PM, a thing happened
+11/13/2023 3:16PM, a thing happened
+11/13/2023 3:16PM, a thing happened
+11/13/2023 3:16PM, a thing happened
+11/13/2023 3:16PM, a thing happened
+11/13/2023 3:16PM, a thing happened
+11/13/2023 3:16PM, a thing happened
+11/13/2023 3:16PM, a thing happened
+11/13/2023 3:16PM, a thing happened
+11/13/2023 3:16PM, a thing happened
+11/13/2023 3:16PM, a thing happened';
+	
+	FIOWrapper.IN.PAR.pData := ADR(exampleLog);
+	FIOWrapper.IN.PAR.len := brsstrlen(ADR(exampleLog));
+	
+	header := 'timestamp, value$r$n';
+	
+	FIOWrapper.IN.PAR.pHeader := ADR(header);
+	FIOWrapper.IN.PAR.headerLen := brsstrlen(ADR(header));
+	
+	FIOWrapper.IN.PAR.MaxFileSize := 300;
+	FIOWrapper.IN.PAR.MultiFile := TRUE;
+	
 END_PROGRAM
 
 PROGRAM _CYCLIC
 	
-	FIOWrapFn_Cyclic(FIOWrapper);
+	IF FIOWrapper.IN.CMD.AppendToFile OR FIOWrapper.IN.CMD.SaveAs THEN
+		FIOWrapper.IN.PAR.len := brsstrlen(ADR(exampleLog));
+	END_IF
 	
-	IF (OpenRecipeFile) THEN
+	FIOWrapFn_Cyclic(FIOWrapper);
 
-		OpenRecipeFile := 0;
-
-		FIOWrapper.IN.PAR.FileDevice := 'USER';
-		FIOWrapper.IN.PAR.FileName := 'rec1.rec';
-		FIOWrapper.IN.PAR.pData := ADR(Recipe);
-		FIOWrapper.IN.PAR.len := SIZEOF(Recipe);
-
-		FIOWrapper.IN.CMD.Open := 1;
-
-	END_IF
-
-	IF (SaveRecipeFile) THEN
-
-		SaveRecipeFile := 0;
-
-		FIOWrapper.IN.PAR.FileDevice := 'USER';
-		FIOWrapper.IN.PAR.FileName := 'rec1.rec';
-		FIOWrapper.IN.PAR.pData := ADR(Recipe);
-		FIOWrapper.IN.PAR.len := SIZEOF(Recipe);
-
-		FIOWrapper.IN.CMD.SaveAs := 1;
-
-	END_IF
-
-	IF (FIOWrapper.OUT.STAT.Done) THEN
-		FIOWrapper.IN.CMD.Open := 0;
-		FIOWrapper.IN.CMD.SaveAs := 0;
-	END_IF
-	 
-END_PROGRAM
-
-PROGRAM _EXIT
-	(* Insert code here *)
-	 
+	brsmemset(ADR(FIOWrapper.IN.CMD),0,SIZEOF(FIOWrapper.IN.CMD));
+	
 END_PROGRAM
 
