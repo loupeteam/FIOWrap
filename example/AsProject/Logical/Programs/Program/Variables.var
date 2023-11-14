@@ -1,5 +1,7 @@
 VAR
+	loadExampleLog : BOOL;
 	header : STRING[255];
 	exampleLog : STRING[3000];
 	FIOWrapper : FIOWrap_typ;
+	loadAppendLogEntry : BOOL;
 END_VAR
