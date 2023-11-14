@@ -384,7 +384,6 @@ FUNCTION FIOWrapFn_Cyclic
 			
 			t.Internal.FUB.Write.pSrc:=		t.IN.PAR.pHeader;
 			t.Internal.FUB.Write.len:=		t.IN.PAR.headerLen;
-			t.Internal.FileLen:=			t.IN.PAR.headerLen;
 			
 			(* Check status *)
 		
@@ -398,7 +397,7 @@ FUNCTION FIOWrapFn_Cyclic
 
 				IF( t.Internal.FUB.Write.status = FIOWRAP_STAT_OK ) THEN
    				
-			
+					t.Internal.FileLen:= t.IN.PAR.headerLen;
 					(* All good, go to close state *)
 					t.Internal.State:=	FIOWRAP_ST_WRITE;
 				
@@ -740,8 +739,7 @@ FUNCTION FIOWrapFn_Cyclic
 				END_IF (* If error *)
 			
 			END_IF (*If done *)
-		
-	
+			
 		FIOWRAP_ST_ERROR:
 	
 		
