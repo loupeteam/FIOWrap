@@ -380,8 +380,11 @@ FUNCTION FIOWrapFn_Cyclic
 			t.Internal.FUB.Write.enable:=	1;
 			t.Internal.FUB.Write.ident:=	t.Internal.FileID;
 			
+			t.Internal.FUB.Write.offset:=	0;
+			
 			t.Internal.FUB.Write.pSrc:=		t.IN.PAR.pHeader;
 			t.Internal.FUB.Write.len:=		t.IN.PAR.headerLen;
+			t.Internal.FileLen:=			t.IN.PAR.headerLen;
 			
 			(* Check status *)
 		
