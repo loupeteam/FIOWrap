@@ -677,7 +677,7 @@ FUNCTION FIOWrapFn_Cyclic
 						t.OUT.STAT.Busy:=	0;
 						t.OUT.STAT.Done:=	1;
 						
-						t.Internal.State:=	FIOWRAP_ST_WAIT;
+						t.Internal.State:=	FIOWRAP_ST_INFO;
 					
 					END_IF (* If ErrorClose *)
 				
@@ -739,6 +739,25 @@ FUNCTION FIOWrapFn_Cyclic
 				END_IF (* If error *)
 			
 			END_IF (*If done *)
+		
+		FIOWRAP_ST_INFO:
+			t.Internal.FUB.Info.enable := 1;
+			t.Internal.FUB.Info.pDevice := ADR(t.IN.PAR.FileDevice);
+			t.Internal.FUB.Info.pName := ADR(t.IN.PAR.FileName);
+			t.Internal.FUB.Info.pInfo := ADR(t.Internal.FileInfo);
+			
+			(* Check status *)
+			IF( t.Internal.FUB.Info.status < FIOWRAP_STAT_DISABLED ) THEN			
+				(* Turn off FUB *)
+				t.Internal.FUB.Info.enable:=	0;
+				IF(t.Internal.FUB.Info.status = FIOWRAP_STAT_OK)THEN	
+					t.Internal.FileLen := t.Internal.FileInfo.size;
+					t.Internal.State:=	FIOWRAP_ST_WAIT;					
+				ELSE
+					(* Error *)		
+					fiowSetError( t.Internal.FUB.Info.status, t );
+				END_IF (* If error *)
+			END_IF (*If done *)
 			
 		FIOWRAP_ST_ERROR:
 	
@@ -787,6 +806,7 @@ FUNCTION FIOWrapFn_Cyclic
 	t.Internal.FUB.Close();
 	t.Internal.FUB.Delete();
 	t.Internal.FUB.Rename();
+	t.Internal.FUB.Info();
 
 
 	(****************************************)
