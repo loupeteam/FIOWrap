@@ -34,14 +34,15 @@ TYPE
 		FIOWRAP_ST_WAIT := 0, (*0*)
 		FIOWRAP_ST_OPEN, (*1*)
 		FIOWRAP_ST_CREATE, (*2*)
-		FIOWRAP_ST_WRITE_HEADER,
-		FIOWRAP_ST_READ, (*3*)
-		FIOWRAP_ST_WRITE, (*4*)
-		FIOWRAP_ST_CLOSE, (*5*)
-		FIOWRAP_ST_DELETE, (*6*)
-		FIOWRAP_ST_DELETE_FILE, (*7*)
-		FIOWRAP_ST_DELETE_DIR, (*8*)
-		FIOWRAP_ST_RENAME, (*9*)
+		FIOWRAP_ST_WRITE_HEADER,(*3)
+		FIOWRAP_ST_READ, (*4*)
+		FIOWRAP_ST_WRITE, (*5*)
+		FIOWRAP_ST_CLOSE, (*6*)
+		FIOWRAP_ST_DELETE, (*7*)
+		FIOWRAP_ST_DELETE_FILE, (*8*)
+		FIOWRAP_ST_DELETE_DIR, (*9*)
+		FIOWRAP_ST_RENAME, (*10*)
+		FIOWRAP_ST_INFO, (*11*)
 		FIOWRAP_ST_ERROR := 999, (*999*)
 		FIOWRAP_ST_
 		);
@@ -54,6 +55,7 @@ TYPE
 		Delete : FileDelete;
 		Rename : FileRename;
 		GetTime : DTGetTime;
+		Info: FileInfo;
 	END_STRUCT;
 	FIOWrap_Internal_typ : 	STRUCT 
 		FileID : UDINT; (*File Ident for reading and writing*)
@@ -70,6 +72,7 @@ TYPE
 		CMD : FIOWrap_IN_CMD_typ;
 		DTStruct : DTStructure;
 		TempStr : STRING[FIOWRAP_STRLEN_NAME];
+		FileInfo : fiFILE_INFO;
 	END_STRUCT;
 	FIOWrap_OUT_STAT_typ : 	STRUCT 
 		Busy : BOOL;
