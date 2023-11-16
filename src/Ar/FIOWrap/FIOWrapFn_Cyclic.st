@@ -373,51 +373,54 @@ FUNCTION FIOWrapFn_Cyclic
 			
 			// skip this if no header
 			IF t.IN.PAR.pHeader = 0 OR t.IN.PAR.headerLen = 0 THEN
+				
 				t.Internal.State:=	FIOWRAP_ST_WRITE;
-				RETURN;
-			END_IF
+				
+			ELSE
 			
-			t.Internal.FUB.Write.enable:=	1;
-			t.Internal.FUB.Write.ident:=	t.Internal.FileID;
+				t.Internal.FUB.Write.enable:=	1;
+				t.Internal.FUB.Write.ident:=	t.Internal.FileID;
 			
-			t.Internal.FUB.Write.offset:=	0;
+				t.Internal.FUB.Write.offset:=	0;
 			
-			t.Internal.FUB.Write.pSrc:=		t.IN.PAR.pHeader;
-			t.Internal.FUB.Write.len:=		t.IN.PAR.headerLen;
+				t.Internal.FUB.Write.pSrc:=		t.IN.PAR.pHeader;
+				t.Internal.headerLen:=			t.IN.PAR.headerLen;
+				t.Internal.FUB.Write.len:=		t.Internal.headerLen;
 			
-			(* Check status *)
+				(* Check status *)
 		
-			IF( t.Internal.FUB.Write.status < FIOWRAP_STAT_DISABLED ) THEN
+				IF( t.Internal.FUB.Write.status < FIOWRAP_STAT_DISABLED ) THEN
   			
 			
-				(* Turn off FUB *)
+					(* Turn off FUB *)
 			
-				t.Internal.FUB.Write.enable:=	0;
+					t.Internal.FUB.Write.enable:=	0;
   
 
-				IF( t.Internal.FUB.Write.status = FIOWRAP_STAT_OK ) THEN
+					IF( t.Internal.FUB.Write.status = FIOWRAP_STAT_OK ) THEN
    				
-					t.Internal.FileLen:= t.IN.PAR.headerLen;
-					(* All good, go to close state *)
-					t.Internal.State:=	FIOWRAP_ST_WRITE;
+						t.Internal.FileLen:= t.IN.PAR.headerLen;
+						(* All good, go to close state *)
+						t.Internal.State:=	FIOWRAP_ST_WRITE;
 				
 				
-				ELSE
+					ELSE
 
 				
-					(* Error *)
-					(* Since already opened file, need to close file before going to error state *)
+						(* Error *)
+						(* Since already opened file, need to close file before going to error state *)
 				
-					t.Internal.ErrorClose:=	1;
+						t.Internal.ErrorClose:=	1;
 				
-					fiowSetError( t.Internal.FUB.Write.status, t );
+						fiowSetError( t.Internal.FUB.Write.status, t );
 				
-					t.Internal.State:=		FIOWRAP_ST_CLOSE;
+						t.Internal.State:=		FIOWRAP_ST_CLOSE;
 			
 				
-				END_IF (* If error *)
+					END_IF (* If error *)
 				
-			END_IF (* If done *)
+				END_IF (* If done *)
+			END_IF
 				
 		FIOWRAP_ST_READ:
 	
@@ -478,7 +481,7 @@ FUNCTION FIOWrapFn_Cyclic
 			IF( t.Internal.CurrOperation = FIOWRAP_OP_SAVEAS )THEN
 		
 				t.Internal.FUB.Write.offset:=	t.IN.PAR.offset + t.IN.PAR.headerLen;
-		
+				
 			ELSIF( 		(t.Internal.CurrOperation = FIOWRAP_OP_APPEND)
 				AND	(t.Internal.FileLen + t.IN.PAR.len <= t.IN.PAR.MaxFileSize)
 				)THEN
