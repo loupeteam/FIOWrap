@@ -34,7 +34,7 @@ TYPE
 		FIOWRAP_ST_WAIT := 0, (*0*)
 		FIOWRAP_ST_OPEN, (*1*)
 		FIOWRAP_ST_CREATE, (*2*)
-		FIOWRAP_ST_WRITE_HEADER,(*3*)
+		FIOWRAP_ST_WRITE_HEADER, (*3*)
 		FIOWRAP_ST_READ, (*4*)
 		FIOWRAP_ST_WRITE, (*5*)
 		FIOWRAP_ST_CLOSE, (*6*)
@@ -55,7 +55,7 @@ TYPE
 		Delete : FileDelete;
 		Rename : FileRename;
 		GetTime : DTGetTime;
-		Info: FileInfo;
+		Info : FileInfo;
 	END_STRUCT;
 	FIOWrap_Internal_typ : 	STRUCT 
 		FileID : UDINT; (*File Ident for reading and writing*)
@@ -73,6 +73,7 @@ TYPE
 		DTStruct : DTStructure;
 		TempStr : STRING[FIOWRAP_STRLEN_NAME];
 		FileInfo : fiFILE_INFO;
+		headerLen : UDINT;
 	END_STRUCT;
 	FIOWrap_OUT_STAT_typ : 	STRUCT 
 		Busy : BOOL;

@@ -480,7 +480,12 @@ FUNCTION FIOWrapFn_Cyclic
 		
 			IF( t.Internal.CurrOperation = FIOWRAP_OP_SAVEAS )THEN
 		
-				t.Internal.FUB.Write.offset:=	t.IN.PAR.offset + t.IN.PAR.headerLen;
+				// only offset write by header if the file is new
+				IF t.Internal.FileCreated THEN
+					t.Internal.FUB.Write.offset:= t.Internal.headerLen;
+				ELSE
+					t.Internal.FUB.Write.offset:=	t.IN.PAR.offset;
+				END_IF
 				
 			ELSIF( 		(t.Internal.CurrOperation = FIOWRAP_OP_APPEND)
 				AND	(t.Internal.FileLen + t.IN.PAR.len <= t.IN.PAR.MaxFileSize)
