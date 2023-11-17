@@ -4,7 +4,8 @@ PROGRAM _INIT
 	FIOWrapper.IN.PAR.FileDevice := 'USER';
 	FIOWrapper.IN.PAR.FileName := 'exampleLog.txt';
 	
-	exampleLog := '11/13/2023 3:16PM, a thing happened
+	exampleLog := 
+'11/13/2023 3:16PM, a thing happened
 11/14/2023 3:16PM, a thing happened
 11/15/2023 3:16PM, a thing happened
 11/16/2023 3:16PM, a thing happened
