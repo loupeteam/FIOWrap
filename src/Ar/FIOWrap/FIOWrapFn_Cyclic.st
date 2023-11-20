@@ -482,7 +482,7 @@ FUNCTION FIOWrapFn_Cyclic
 		
 				// only offset write by header if the file is new
 				IF t.Internal.FileCreated THEN
-					t.Internal.FUB.Write.offset:= t.Internal.headerLen;
+					t.Internal.FUB.Write.offset:= t.Internal.headerLen + t.IN.PAR.offset;
 				ELSE
 					t.Internal.FUB.Write.offset:=	t.IN.PAR.offset;
 				END_IF
