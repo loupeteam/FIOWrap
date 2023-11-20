@@ -97,9 +97,9 @@ TYPE
 		len : UDINT; (*Length of the data to be read or written*)
 		offset : UDINT; (*Offset within the file to read/write from/to.*)
 		MaxFileSize : UDINT; (*Maximum file size (only evaluated when appending to a file)*)
-		MultiFile : BOOL;
-		pHeader : UDINT;
-		headerLen : UDINT;
+		MultiFile : BOOL; (*Allow multiple files to be created. When true, AppendToFile will not issue an error if the MaxFileSize would be exceeded. Instead, a new file is created with the name FileName. The original file is renamed to include the FileName and the Suffix.*)
+		pHeader : UDINT; (*Address of data to be added to the top of new files*)
+		headerLen : UDINT; (*Length or size of header in bytes*)
 	END_STRUCT;
 	FIOWrap_IN_CMD_typ : 	STRUCT 
 		Open : BOOL; (*Open a file and read its contents*)
