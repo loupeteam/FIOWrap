@@ -1,4 +1,5 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?AutomationStudio Version=4.11.4.55 FileVersion="4.9"?>
 <Hardware xmlns="http://br-automation.co.at/AS/Hardware">
   <Module Name="5AC901.IPLK-00" Type="5AC901.IPLK-00" Version="1.8.0.1">
     <Connection Connector="SS" TargetModule="5PC910.SX02-00" TargetConnector="SS2" />
@@ -27,6 +28,9 @@
     <Parameter ID="Cyclic2Duration" Value="10000" />
     <Parameter ID="Cyclic3Duration" Value="20000" />
     <Parameter ID="Cyclic3Tolerance" Value="40000" />
+    <Group ID="FileDevice1" />
+    <Parameter ID="FileDeviceName1" Value="USER" />
+    <Parameter ID="FileDevicePath1" Value="USER_PATH" />
     <Parameter ID="TimeZone" Value="25" />
     <Group ID="FtpUser1" />
     <Parameter ID="FtpUsername1" Value="dev" />

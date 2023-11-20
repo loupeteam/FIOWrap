@@ -19,10 +19,11 @@
     <Object Type="Package">Motion</Object>
   </Objects>
   <Configuration ModuleId="5PC900.TS17-04">
-    <AutomationRuntime Version="C4.90" />
+    <AutomationRuntime Version="D4.92" />
     <Build GccVersion="6.3.0" PreBuildStep="" />
     <DefaultTargetMemory Tasks="UserROM" />
     <Safety SafetyRelease="0.0" />
-    <Vc FirmwareVersion="V4.72.5" />
+    <Transfer SavedOfflineInstallationFolder="" SavedPipDestinationFolder="" SavedRuntimeUtilityCenterPackagePath="" />
+    <Vc FirmwareVersion="" />
   </Configuration>
 </Cpu>
