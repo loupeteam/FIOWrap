@@ -1,4 +1,4 @@
-0.9.2 - Add header parameter that if specified is added to the top on new files
+0.10.0 - Add header parameter that if specified is added to the top on new files
 
 0.9.1 - Migrate from AsString to AsBrStr
 
