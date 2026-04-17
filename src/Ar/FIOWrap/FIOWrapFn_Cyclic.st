@@ -681,10 +681,7 @@ FUNCTION FIOWrapFn_Cyclic
 					
 					
 						(* otherwise, done, set status and go to wait state *)	
-					
-						t.OUT.STAT.Busy:=	0;
-						t.OUT.STAT.Done:=	1;
-						
+									
 						t.Internal.State:=	FIOWRAP_ST_INFO;
 					
 					END_IF (* If ErrorClose *)
@@ -760,6 +757,8 @@ FUNCTION FIOWrapFn_Cyclic
 				t.Internal.FUB.Info.enable:=	0;
 				IF(t.Internal.FUB.Info.status = FIOWRAP_STAT_OK)THEN	
 					t.Internal.FileLen := t.Internal.FileInfo.size;
+					t.OUT.STAT.Busy:=	0;
+					t.OUT.STAT.Done:=	1;
 					t.Internal.State:=	FIOWRAP_ST_WAIT;					
 				ELSE
 					(* Error *)		

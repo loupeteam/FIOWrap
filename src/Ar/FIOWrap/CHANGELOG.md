@@ -1,3 +1,5 @@
+0.10.1 - Fix done early bug
+
 0.10.0 - Add header parameter that if specified is added to the top on new files
 
 0.9.1 - Migrate from AsString to AsBrStr
