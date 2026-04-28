@@ -16,7 +16,6 @@
         "gitClient": "GitExtensions"
     },
     "dependencies": {
-        "@loupeteam/fiowrap": "^0.9.1",
-        "@loupeteam/librarybuilderproject": "^0.3.0"
+        "@loupeteam/stringext": "^1.0.0"
     }
 }

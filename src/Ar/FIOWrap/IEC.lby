@@ -16,6 +16,6 @@
     <Dependency ObjectName="FileIO" />
     <Dependency ObjectName="astime" />
     <Dependency ObjectName="AsBrStr" />
-    <Dependency ObjectName="StringExt" FromVersion="0.11.0" />
+    <Dependency ObjectName="StringExt" FromVersion="1.0.0" />
   </Dependencies>
 </Library>
