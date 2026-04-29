@@ -1,0 +1,9 @@
+VAR
+	loadAppendEntry : BOOL;
+	loadExampleLog : BOOL;
+	header : STRING[255];
+	newLogEntry : STRING[255];
+	data : STRING[2000];
+	exampleLog : STRING[1000];
+	FIOWrapper : FIOWrap_typ;
+END_VAR
